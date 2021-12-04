@@ -1,14 +1,13 @@
 with open("input.txt", "r") as f:
-    lines = f.readlines()
+    lines = [line.strip() for line in f.readlines()]
 
     gamma = ""
     epsilon = ""
 
-    for i in range(0, len(lines[0])-1):
+    for i in range(0, len(lines[0])):
         zero = 0
         one = 0
         for line in lines:
-            line = line.strip()
             if line[i] == "0":
                 zero += 1
             else: one += 1

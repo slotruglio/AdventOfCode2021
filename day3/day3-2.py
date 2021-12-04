@@ -16,27 +16,24 @@ def getBit(n,list, i):
         else: toReturn = "0"
     return toReturn
 
-
 with open("input.txt", "r") as f:
-    lines = f.readlines();
+    lines = [line.strip() for line in f.readlines()]
 
-    oxygen = []
-    co2 = []
-
-    for line in lines:
-        oxygen.append(line.strip())
-        co2.append(line.strip())
+    oxygen = lines.copy()
+    co2 = lines.copy()
 
     oxygen_pattern = ""
     co2_pattern = ""
-    for i in range(0, len(lines[0])-1):
+    for i in range(0, len(lines[0])):
+        if len(oxygen) == len(co2) == 1: break
+
         if len(oxygen) > 1:
             oxygen_pattern = oxygen_pattern + getBit(1, oxygen, i)
-            oxygen = [ele for ele in oxygen if ele.startswith(oxygen_pattern)]
+            oxygen = [e for e in oxygen if e.startswith(oxygen_pattern)]
 
         if len(co2) > 1:
             co2_pattern = co2_pattern + getBit(0, co2, i)
-            co2 = [ele for ele in co2 if ele.startswith(co2_pattern)]
+            co2 = [e for e in co2 if e.startswith(co2_pattern)]
 
     oxygen_value = int(oxygen[0], 2)
     co2_value = int(co2[0], 2)
