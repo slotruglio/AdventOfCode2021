@@ -1,5 +1,3 @@
-import sys
-
 with open("input.txt", "r") as f:
     x = 0
     y = 0
