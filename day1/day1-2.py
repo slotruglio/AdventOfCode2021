@@ -1,39 +1,26 @@
-import sys, os
+with open("input.txt", "r") as f:
+    values = [int(e) for e in f.readlines()]
+    windowsSum = list()
 
-f = open("input.txt", "r")
-lines = f.readlines()
+    index = 0
+    for value in values:
+        if(index+2 < len(values)):
+            sum = value
+            sum += values[index+1]
+            sum += values[index+2]
+            windowsSum.append(sum)
+        index += 1
 
-window_size = 3
-windowsSum = list()
-values = list()
+    isFirst = True
+    cValue = 0
+    counter = 0
 
-index = 0
+    for value in windowsSum :
+        if isFirst: isFirst = False
+        else:
+            if cValue < value :
+                counter += 1
+        cValue = value
 
-for line in lines :
-    values.append(int(line))
-
-for value in values:
-    if(index+2 < len(values)):
-        sum = value
-        sum += values[index+1]
-        sum += values[index+2]
-        print(index, ": ", sum)
-        windowsSum.append(sum)
-    index += 1
-
-isFirst = True
-cValue = 0
-counter = 0
-
-for value in windowsSum :
-    if isFirst:
-        isFirst = False
-    else:
-        if cValue < value :
-            counter += 1
-    cValue = value
-
-print("Total increment = ", counter) 
-f.close()
-
+    print("Total increment = ", counter) 
 
