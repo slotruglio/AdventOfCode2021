@@ -1,21 +1,17 @@
 def column(matrix, i):
     return [row[i] for row in matrix]
 
+def countTrue(list):
+    trueCounter = 0
+    for x in list:
+        if x[1] == True: trueCounter += 1
+    if trueCounter == 5: return True
+    
 def boardChecker(board):
     for row in board:
-        trueCounter = 0
-        for x in row:
-            if x[1] == True:
-                trueCounter += 1
-        if trueCounter == 5:
-            return True
+        if countTrue(row): return True
     for i in range(0, len(board)):
-        trueCounter = 0
-        for x in column(board, i):
-            if x[1] == True:
-                trueCounter += 1
-        if trueCounter == 5:
-            return True
+        if countTrue(column(board, i)): return True
     return False
 
 def winningBoardAtNumber(numbers, boards):
@@ -54,14 +50,13 @@ with open("input.txt", "r") as f:
                 try:
                     x = int(n)
                     tmp.append([x, False])
-                except: count = 0
+                except: pass
             curr_board.append(tmp)
             if len(curr_board) == 5:
                 boards.append(curr_board)
                 curr_board = [] 
 
     curr_extracted = -1
-    counter = 0
     winning_board = []
 
     while len(boards) > 0:
@@ -70,9 +65,9 @@ with open("input.txt", "r") as f:
         winning_board = tmp[1]
         index = tmp[2]
         del boards[index]
+
     sum = 0
     for row in winning_board:
         for x in row:
-            if x[1] == False:
-                sum += x[0]
-    print("Final score is {} * {} = {}".format(sum, curr_extracted, sum*curr_extracted))
+            if x[1] == False: sum += x[0]
+    print("Final score is {}*{} = {}".format(sum, curr_extracted, sum*curr_extracted))
