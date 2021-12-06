@@ -48,6 +48,17 @@ with open("input.txt", "r") as f:
             else:
                 for i in range(y2, y1+1):
                     matrix[i][x2] += 1
+        elif abs(x2 - x1) == abs(y2 - y1):
+            min = [x1, y1] if y1 < y2 else [x2, y2]
+            max = [x2, y2] if y1 < y2 else [x1, y1]
+            dir = 1 if min[0] < max[0] else -1
+            if min[0] < max[0]:
+                for i, x in enumerate(range(min[0], max[0] + 1)):
+                    matrix[min[1] + i][x] += 1
+            else:
+                for i, x in enumerate(range(min[0], max[0] - 1, -1)):
+                    matrix[min[1] + i][x] += 1
+
     counter = 0
     for row in matrix:
         for x in row:
