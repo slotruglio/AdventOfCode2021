@@ -1,5 +1,6 @@
 import time
 import os
+from datetime import datetime
 from subprocess import call
 
 start_path = '.' # current directory
@@ -33,5 +34,7 @@ for i in range(0, 10):
     times.append(stop)
     print("Time of execution[{}]: {}".format(i, stop))
 
-
-print("Average time of execution:", sum(times)/len(times))
+f = open("bench/{}{}.txt".format(program, datetime.now()), "w")
+f.write("Average time of execution:{}".format(sum(times)/len(times)))
+f.close()
+print("Average time of execution: ", sum(times)/len(times))
